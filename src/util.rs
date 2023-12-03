@@ -36,12 +36,13 @@ pub mod utils {
         return line.split("\n").map(|row| row.parse().unwrap()).collect();
     }
 
-    pub fn parse_to_grid<T: FromStr>(file: &str) -> Vec<Vec<T>> where <T as FromStr>::Err: Debug{
+    pub fn parse_to_grid<T: FromStr>(file: &str) -> Vec<Vec<T>> where <T as FromStr>::Err: Debug {
         let grid: Vec<Vec<T>> = file
             .split("\n")
             .map(|row| {
-                row.chars()
-                    .map(|char| char.to_string().parse::<T>().unwrap())
+                row.trim().chars()
+                    .map(|char| char.to_string())
+                    .map(|char| char.parse::<T>().unwrap())
                     .collect()
             })
             .collect();
