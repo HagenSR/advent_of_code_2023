@@ -20,9 +20,7 @@ fn part_02() {
         let card = frontier.remove(0);
         count += 1;
         for i in 0..card.number_correct {
-            frontier.push(
-                cards[(card.id + i) as usize].clone()
-            )
+            frontier.push(cards[(card.id + i) as usize].clone())
         }
     }
     println!("{}", count)

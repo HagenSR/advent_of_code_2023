@@ -11,7 +11,12 @@ impl FromStr for Game {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut parts = s.split(":");
-        let id = parts.next().unwrap().replace("Game ", "").parse::<i32>().expect("");
+        let id = parts
+            .next()
+            .unwrap()
+            .replace("Game ", "")
+            .parse::<i32>()
+            .expect("");
         let turns_string = parts.next().unwrap().split(";");
         let mut turns: Vec<Vec<(String, i32)>> = Vec::new();
         for game in turns_string {
@@ -19,7 +24,12 @@ impl FromStr for Game {
             let colors_and_numbers = game.split(",");
             for pul in colors_and_numbers {
                 let mut color_and_number = pul.trim().split(" ");
-                let num = color_and_number.next().unwrap().trim().parse::<i32>().unwrap();
+                let num = color_and_number
+                    .next()
+                    .unwrap()
+                    .trim()
+                    .parse::<i32>()
+                    .unwrap();
                 turn.push((color_and_number.next().unwrap().trim().to_string(), num));
             }
             turns.push(turn);

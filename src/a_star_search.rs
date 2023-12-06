@@ -1,4 +1,4 @@
-use std::{collections::btree_map::BTreeMap};
+use std::collections::btree_map::BTreeMap;
 
 #[allow(dead_code)]
 pub struct AStarSearch {

@@ -1,6 +1,6 @@
-use std::collections::BTreeMap;
 use crate::day_02::game::Game;
 use crate::util;
+use std::collections::BTreeMap;
 
 pub fn main() {
     part_01();
@@ -9,11 +9,7 @@ pub fn main() {
 
 fn part_01() {
     let games = util::utils::read_file_to_lines::<Game>("src/day_02/data.txt", "\n");
-    let max_values = BTreeMap::from([
-        ("red", 12),
-        ("green", 13),
-        ("blue", 14)
-    ]);
+    let max_values = BTreeMap::from([("red", 12), ("green", 13), ("blue", 14)]);
     let mut good_ids: Vec<i32> = Vec::new();
     for game in games {
         let mut good = true;
@@ -45,7 +41,11 @@ fn part_02() {
                 }
             }
         }
-        let prod: i32 = max_values.values().copied().reduce(|acc, e| acc * e).unwrap();
+        let prod: i32 = max_values
+            .values()
+            .copied()
+            .reduce(|acc, e| acc * e)
+            .unwrap();
         powers.push(prod);
     }
     println!("{}", powers.iter().sum::<i32>())

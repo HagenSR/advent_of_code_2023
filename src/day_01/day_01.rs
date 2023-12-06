@@ -52,7 +52,7 @@ fn part_02() {
         let mut first_char = "".to_string();
         let mut last_char = "".to_string();
         for (ind, char) in line.chars().enumerate() {
-            let num_from_sub =  substring_contains_num_starting_from_ind(ind, line, &num_dict);
+            let num_from_sub = substring_contains_num_starting_from_ind(ind, line, &num_dict);
             if char.is_numeric() || num_from_sub != -1 {
                 let mut potential_num = char.to_string();
                 if num_from_sub != -1 {
@@ -74,7 +74,11 @@ fn part_02() {
     println!("{}", sum)
 }
 
-fn substring_contains_num_starting_from_ind(ind: usize, line: &str, str_to_num: &BTreeMap<&str, i32>) -> i32 {
+fn substring_contains_num_starting_from_ind(
+    ind: usize,
+    line: &str,
+    str_to_num: &BTreeMap<&str, i32>,
+) -> i32 {
     for (key, real) in str_to_num.iter() {
         let ln = key.len();
         if ind + ln < line.len() && line[ind..ind + ln] == **key {

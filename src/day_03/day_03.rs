@@ -39,16 +39,28 @@ fn part_01() {
     println!("{:?}", sums.iter().sum::<i32>())
 }
 
-fn determine_touching(x: i32, y: i32, grid: &Vec<Vec<String>>, nums: [&str; 10], gear_only: bool) -> bool {
+fn determine_touching(
+    x: i32,
+    y: i32,
+    grid: &Vec<Vec<String>>,
+    nums: [&str; 10],
+    gear_only: bool,
+) -> bool {
     for i in -1..2i32 {
         for j in -1..2i32 {
-            if 0 <= x + i && x + i < grid.len() as i32 && 0 <= y + j && y + j < grid[(x + i) as usize].len() as i32 {
+            if 0 <= x + i
+                && x + i < grid.len() as i32
+                && 0 <= y + j
+                && y + j < grid[(x + i) as usize].len() as i32
+            {
                 if gear_only {
                     if grid[(x + i) as usize][(y + j) as usize] == "*" {
                         return true;
                     }
                 } else {
-                    if grid[(x + i) as usize][(y + j) as usize] != "." && !nums.contains(&&*grid[(x + i) as usize][(y + j) as usize]) {
+                    if grid[(x + i) as usize][(y + j) as usize] != "."
+                        && !nums.contains(&&*grid[(x + i) as usize][(y + j) as usize])
+                    {
                         return true;
                     }
                 }
@@ -118,7 +130,11 @@ fn part_02() {
 fn determine_touching_gear(x: i32, y: i32, x2: i32, y2: i32, grid: &Vec<Vec<String>>) -> bool {
     for i in -1..2i32 {
         for j in -1..2i32 {
-            if 0 <= x + i && x + i < grid.len() as i32 && 0 <= y + j && y + j < grid[(x + i) as usize].len() as i32 {
+            if 0 <= x + i
+                && x + i < grid.len() as i32
+                && 0 <= y + j
+                && y + j < grid[(x + i) as usize].len() as i32
+            {
                 if x + i == x2 && y + j == y2 {
                     return true;
                 }

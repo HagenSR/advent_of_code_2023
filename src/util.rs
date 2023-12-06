@@ -1,18 +1,32 @@
 #[allow(dead_code)]
 #[allow(unused_imports)]
 pub mod utils {
+    use crate::a_star_search::AStarSearch;
     use std::collections::BTreeMap;
     use std::fmt::Debug;
     use std::fs;
     use std::str::FromStr;
-    use crate::a_star_search::AStarSearch;
 
     pub fn read_file_to_string(filepath: &str) -> String {
         return fs::read_to_string(filepath).expect("Failed to read file");
     }
 
-    pub fn read_file_to_lines<T: FromStr>(filepath: &str, delimiter: &str) -> Vec<T> where <T as FromStr>::Err: Debug {
+    pub fn read_file_to_lines<T: FromStr>(filepath: &str, delimiter: &str) -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug,
+    {
         return read_file_to_string(filepath)
+            .split(delimiter)
+            .filter(|p| !p.is_empty())
+            .map(|r| r.trim().parse().unwrap())
+            .collect();
+    }
+
+    pub fn read_string_to_object<T: FromStr>(string: &str, delimiter: &str) -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug,
+    {
+        return string
             .split(delimiter)
             .filter(|p| !p.is_empty())
             .map(|r| r.trim().parse().unwrap())
@@ -32,15 +46,22 @@ pub mod utils {
         println!("{:?}", groups)
     }
 
-    pub fn parse_to_object<T: FromStr>(line: &str) -> Vec<T> where <T as FromStr>::Err: Debug {
+    pub fn parse_to_object<T: FromStr>(line: &str) -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug,
+    {
         return line.split("\n").map(|row| row.parse().unwrap()).collect();
     }
 
-    pub fn parse_to_grid<T: FromStr>(file: &str) -> Vec<Vec<T>> where <T as FromStr>::Err: Debug {
+    pub fn parse_to_grid<T: FromStr>(file: &str) -> Vec<Vec<T>>
+    where
+        <T as FromStr>::Err: Debug,
+    {
         let grid: Vec<Vec<T>> = file
             .split("\n")
             .map(|row| {
-                row.trim().chars()
+                row.trim()
+                    .chars()
                     .map(|char| char.to_string())
                     .map(|char| char.parse::<T>().unwrap())
                     .collect()
