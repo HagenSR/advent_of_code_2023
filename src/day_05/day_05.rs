@@ -21,7 +21,7 @@ fn part_02() {
         grouped_seeds.push((seeds[index], seeds[index + 1]))
     }
     grouped_seeds.sort_by(|e1, e2| (e1.0.cmp(&e2.0)));
-    let mut maps = read_maps(lines);
+    let maps = read_maps(lines);
     let mut pot_seeds: Vec<i128> = Vec::new();
     let start_map = maps.get(0).unwrap();
     let mut cur_seed = grouped_seeds[0].0;
