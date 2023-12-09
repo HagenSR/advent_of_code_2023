@@ -1,5 +1,4 @@
-#[derive(Clone)]
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Clone, Debug, Ord, PartialOrd, Eq, PartialEq)]
 pub enum HandType {
     FiveOfAKind = 1,
     FourOfAKind = 2,

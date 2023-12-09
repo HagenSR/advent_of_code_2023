@@ -10,18 +10,16 @@ pub struct HandP2 {
     pub hand_type: HandType,
     pub bid: i32,
 }
-
-impl HandP2 {
-    pub(crate) const IS_PART_TWO: bool = false;
-}
-
 impl FromStr for HandP2 {
     type Err = std::num::ParseIntError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut parts = s.trim().split(" ");
         let mut hand: Vec<char> = parse_list(&mut parts);
-        hand = hand.iter().map(|elem| if elem == &'J' { 'L' } else { *elem }).collect();
+        hand = hand
+            .iter()
+            .map(|elem| if elem == &'J' { 'L' } else { *elem })
+            .collect();
         let bid: i32 = parts.next().unwrap().trim().parse().unwrap();
         let hand_type = determine_hand_type(&hand);
         return Ok(HandP2 {
@@ -53,9 +51,7 @@ pub fn determine_hand_type(hand: &Vec<char>) -> HandType {
 }
 
 fn get_num_of_kind(hand: &Vec<char>) -> BTreeMap<&char, i32> {
-    return hand.iter()
-        .filter(|elem| elem != &&'L')
-        .fold(
+    return hand.iter().filter(|elem| elem != &&'L').fold(
         BTreeMap::new(),
         |mut acc: BTreeMap<&char, i32>, elem: &char| {
             let cur_count = acc.entry(elem).or_insert(0);
@@ -103,7 +99,7 @@ impl PartialOrd<Self> for HandP2 {
             ('4', 3),
             ('3', 2),
             ('2', 1),
-            ('L', -1)
+            ('L', -1),
         ]);
         for (h1, h2) in self.hand.iter().zip(&other.hand) {
             if h1 != h2 {

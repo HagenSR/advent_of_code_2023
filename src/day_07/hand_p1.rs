@@ -16,7 +16,7 @@ impl FromStr for HandP1 {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut parts = s.trim().split(" ");
-        let mut hand: Vec<char> = parse_list(&mut parts);
+        let hand: Vec<char> = parse_list(&mut parts);
         let bid: i32 = parts.next().unwrap().trim().parse().unwrap();
         let hand_type = determine_hand_type(&hand);
         return Ok(HandP1 {
@@ -29,7 +29,7 @@ impl FromStr for HandP1 {
 
 pub fn determine_hand_type(hand: &Vec<char>) -> HandType {
     let num_of_kind = get_num_of_kind(&hand);
-    let mut max_of_kind = get_max_of_kind(&num_of_kind);
+    let max_of_kind = get_max_of_kind(&num_of_kind);
     if max_of_kind >= 5 {
         return HandType::FiveOfAKind;
     } else if max_of_kind == 4 {
