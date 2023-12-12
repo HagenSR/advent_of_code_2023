@@ -11,65 +11,70 @@ pub struct Derivative {
 }
 
 impl Derivative {
+    pub fn new(values: Vec<i32>) -> Self {
+        Derivative {
+            values,
+            differences: vec![],
+            all_0: false,
+            next: 0,
+            previous: 0,
+        }
+    }
+
     pub fn find_boundaries(derivative: &mut Derivative) -> (i32, i32) {
-        construct_next(derivative);
-        let mut found: Vec<Derivative> = vec![derivative.clone()];
-        let mut last = found.last().unwrap();
-        while !last.all_0 {
-            let next = &mut Derivative {
-                values: last.differences.clone(),
-                differences: vec![],
-                all_0: false,
-                next: 0,
-                previous: 0,
-            };
-            construct_next(next);
-            found.push(next.clone());
-            last = found.last().unwrap();
-        }
-        for ind in (0..found.len()).rev() {
-            if ind == found.len() - 1 {
-                found[ind].next = *found[ind].values.last().unwrap();
-                found[ind].previous = *found[ind].values.last().unwrap();
-            } else {
-                found[ind].next = found[ind].values.last().unwrap() + found[ind + 1].next;
-                found[ind].previous = found[ind].values.first().unwrap() - found[ind + 1].previous;
-            }
-        }
+        let mut found = &mut vec![derivative.clone()];
+        find_differences(&mut found);
+        find_boundaries(&mut found);
         let orig = found.first().unwrap();
         return (orig.previous, orig.next);
     }
 }
 
-fn construct_next(derivative: &mut Derivative) -> &mut Derivative {
+fn find_differences(found: &mut Vec<Derivative>) {
+    let mut last = found.last_mut().unwrap();
+    find_difference(last);
+    while !last.all_0 {
+        let mut next = &mut Derivative::new(last.differences.clone());
+        find_difference(next);
+        found.push(next.clone());
+        last = found.last_mut().unwrap();
+    }
+}
+
+fn find_difference(der: &mut Derivative) {
     let mut all_0 = true;
-    for ind in 1..derivative.values.len() {
-        let diff = derivative.values[ind] - derivative.values[ind - 1];
+    for ind in 1..der.values.len() {
+        let diff = der.values[ind] - der.values[ind - 1];
         if diff != 0 {
             all_0 = false;
         }
-        derivative.differences.push(diff);
-        derivative.all_0 = all_0
+        der.differences.push(diff);
+        der.all_0 = all_0
     }
-    return derivative;
+}
+
+fn find_boundaries(found: &mut Vec<Derivative>) {
+    for ind in (0..found.len()).rev() {
+        if ind == found.len() - 1 {
+            found[ind].next = *found[ind].values.last().unwrap();
+            found[ind].previous = *found[ind].values.first().unwrap();
+        } else {
+            found[ind].next = found[ind].values.last().unwrap() + found[ind + 1].next;
+            found[ind].previous = found[ind].values.first().unwrap() - found[ind + 1].previous;
+        }
+    }
 }
 
 impl FromStr for Derivative {
     type Err = std::num::ParseIntError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut values: Vec<i32> = s
+        let values: Vec<i32> = s
             .trim()
             .split(" ")
             .map(|elem| elem.trim().parse::<i32>().unwrap())
             .collect();
-        return Ok(Derivative {
-            values,
-            differences: Vec::new(),
-            all_0: false,
-            next: 0,
-            previous: 0,
-        });
+        return Ok(Derivative::new(values));
     }
 }
 
@@ -79,6 +84,7 @@ impl Debug for Derivative {
             .field("values", &self.values)
             .field("differences", &self.differences)
             .field("next", &self.next)
+            .field("previous", &self.previous)
             .finish()
     }
 }

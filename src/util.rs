@@ -1,7 +1,6 @@
 #[allow(dead_code)]
 #[allow(unused_imports)]
 pub mod utils {
-    use crate::a_star_search::AStarSearch;
     use std::collections::BTreeMap;
     use std::fmt::Debug;
     use std::fs;
@@ -53,11 +52,11 @@ pub mod utils {
         return line.split("\n").map(|row| row.parse().unwrap()).collect();
     }
 
-    pub fn parse_to_grid<T: FromStr>(file: &str) -> Vec<Vec<T>>
+    pub fn parse_to_grid<T: FromStr>(file_contents: &str) -> Vec<Vec<T>>
     where
         <T as FromStr>::Err: Debug,
     {
-        let grid: Vec<Vec<T>> = file
+        let grid: Vec<Vec<T>> = file_contents
             .split("\n")
             .map(|row| {
                 row.trim()

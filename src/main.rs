@@ -1,4 +1,3 @@
-mod a_star_search;
 mod day_01;
 mod day_02;
 mod day_03;
@@ -8,11 +7,13 @@ mod day_06;
 mod day_07;
 mod day_08;
 mod day_09;
+mod day_10;
+mod day_11;
 
 mod util;
 
 fn main() {
-    let day_override = 9;
+    let day_override = 11;
     match day_override {
         1 => day_01::day_01::main(),
         2 => day_02::day_02::main(),
@@ -23,6 +24,8 @@ fn main() {
         7 => day_07::day_07::main(),
         8 => day_08::day_08::main(),
         9 => day_09::day_09::main(),
+        10 => day_10::day_10::main(),
+        11 => day_11::day_11::main(),
         _ => println!("Not a valid day"),
     }
 }

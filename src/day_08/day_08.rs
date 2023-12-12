@@ -3,7 +3,7 @@ use crate::util;
 use std::collections::BTreeMap;
 
 pub fn main() {
-    // part_01();
+    part_01();
     part_02();
 }
 
