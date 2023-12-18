@@ -42,10 +42,10 @@ fn part_2() {
     }
 
     let mut sum: u128 = 0;
-    for (boxInd, val) in map.iter().enumerate() {
-        for (lensInd, lens) in val.iter().enumerate() {
+    for (box_ind, val) in map.iter().enumerate() {
+        for (lens_ind, lens) in val.iter().enumerate() {
             let m = lens.1;
-            sum += (boxInd as u128 + 1) * (lensInd as u128 + 1) * m;
+            sum += (box_ind as u128 + 1) * (lens_ind as u128 + 1) * m;
         }
     }
     println!("{}", sum)

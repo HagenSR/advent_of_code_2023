@@ -34,7 +34,7 @@ fn find_differences(found: &mut Vec<Derivative>) {
     let mut last = found.last_mut().unwrap();
     find_difference(last);
     while !last.all_0 {
-        let mut next = &mut Derivative::new(last.differences.clone());
+        let next = &mut Derivative::new(last.differences.clone());
         find_difference(next);
         found.push(next.clone());
         last = found.last_mut().unwrap();

@@ -65,7 +65,6 @@ impl PipeMap {
         }
         println!("{:?}", self.distances.values().max().unwrap())
     }
-    pub fn find_islands(&mut self) {}
 
     pub fn get_surrounding(&mut self, start: (usize, usize)) -> Vec<(usize, usize)> {
         let mut potential: Vec<(usize, usize)> = vec![];
@@ -119,6 +118,7 @@ impl PipeMap {
         return lowest;
     }
 
+    #[allow(dead_code)]
     pub fn print_distances(&self) {
         let mut grid: Vec<Vec<String>> =
             vec![vec![" ".to_string(); self.grid.len()]; self.grid.len()];

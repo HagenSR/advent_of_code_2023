@@ -49,7 +49,7 @@ fn run_simulation(beam: Beam, grid: &Vec<Vec<char>>) -> usize {
     let mut seen_squares: BTreeSet<(i32, i32)> = BTreeSet::new();
     let mut seen_beams: BTreeSet<Beam> = BTreeSet::new();
     while let Some(mut position) = positions.pop() {
-        let mut result = position.next_square(&grid);
+        let result = position.next_square(&grid);
         for beam in result.0 {
             if !seen_beams.contains(&beam) {
                 seen_beams.insert(beam.clone());

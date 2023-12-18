@@ -2,7 +2,7 @@ use crate::day_10::pipe_map::PipeMap;
 use crate::util;
 
 pub fn main() {
-    // part_1();
+    part_1();
     part_2();
 }
 
