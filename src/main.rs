@@ -13,11 +13,12 @@ mod day_13;
 mod day_15;
 mod day_16;
 mod day_17;
+mod day_25;
 
 mod util;
 
 fn main() {
-    let day_override = 13;
+    let day_override = 25;
     match day_override {
         1 => day_01::day_01::main(),
         2 => day_02::day_02::main(),
@@ -34,6 +35,7 @@ fn main() {
         15 => day_15::day_15::main(),
         16 => day_16::day_16::main(),
         17 => day_17::day_17::main(),
+        25 => day_25::day_25::main(),
         _ => println!("Not a valid day"),
     }
 }

@@ -9,8 +9,9 @@ pub fn main() {
 fn part_1() {
     let file = util::utils::read_file_to_string("src/day_17/data.txt");
     let map = util::utils::parse_to_grid::<i64>(&file);
-    let mut astar = AStar::new(map.clone(), (map.len() - 1, map[0].len() - 1), (0, 0));
-    let res = astar.perform_search().unwrap_or(Vec::new());
+    let mut astar = AStar::new(map.clone(), (0, 0), (map.len() - 1, map[0].len() - 1));
+    let mut res = astar.perform_search().unwrap_or(Vec::new());
+    res.remove(res.len() - 1);
     let sum: i64 = res.iter().map(|tup| map[tup.0][tup.1]).sum();
     println!("{}", sum);
     println!("{:?}", astar.print_distances(res))
@@ -18,4 +19,4 @@ fn part_1() {
 
 // 760 too high
 
-fn part_2() {}
+// fn part_2() {}

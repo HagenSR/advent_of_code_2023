@@ -1,3 +1,3 @@
-pub mod day_17;
 mod a_star;
+pub mod day_17;
 mod search;

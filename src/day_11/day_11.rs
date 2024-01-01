@@ -97,9 +97,9 @@ fn find_distance(
         };
         if grid[star2.0][cur] == '2' && !is_part_two {
             dist += 2;
-        } else if grid[star2.0][cur] == '2' && is_part_two  {
+        } else if grid[star2.0][cur] == '2' && is_part_two {
             dist += 1000000;
-        } else{
+        } else {
             dist += 1
         }
     }
